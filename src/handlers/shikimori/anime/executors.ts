@@ -1,5 +1,4 @@
 import { execute, graphql } from '~/shikimori/gql'
-import { maybe } from '~/utils/maybe'
 
 export const searchAnime = execute(graphql(`
   query SearchAnime($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
