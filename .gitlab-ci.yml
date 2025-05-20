@@ -12,7 +12,7 @@ deploy-job:
   rules:
     - if: $CI_PROJECT_NAMESPACE == "asyomei" && $CI_PROJECT_NAME == "himawari-bot"
   script:
-    - apk add curl sshpass
+    - apk add curl sshpass openssh-client
     - corepack enable pnpm
     - pnpm install -P
     - pnpm build
