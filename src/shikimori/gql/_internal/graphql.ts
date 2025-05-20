@@ -1078,6 +1078,31 @@ export type GetAnimeStatusesQueryVariables = Exact<{
 
 export type GetAnimeStatusesQuery = { __typename?: 'Query', animes: Array<{ __typename?: 'Anime', statusesStats?: Array<{ __typename?: 'StatusStat', status: UserRateStatusEnum, count: number }> | null }> };
 
+export type SearchCharacterQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+  limit: Scalars['PositiveInt']['input'];
+  page: Scalars['PositiveInt']['input'];
+}>;
+
+
+export type SearchCharacterQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', id: string, russian?: string | null, name: string }> };
+
+export type SearchCharacterInlineQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+  limit: Scalars['PositiveInt']['input'];
+  page: Scalars['PositiveInt']['input'];
+}>;
+
+
+export type SearchCharacterInlineQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', id: string, russian?: string | null, name: string, url: string, poster?: { __typename?: 'Poster', previewUrl: string } | null }> };
+
+export type GetCharacterInfoQueryVariables = Exact<{
+  id?: InputMaybe<Array<Scalars['ID']['input']> | Scalars['ID']['input']>;
+}>;
+
+
+export type GetCharacterInfoQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', name: string, russian?: string | null, japanese?: string | null, synonyms: Array<string>, descriptionHtml?: string | null, descriptionSource?: string | null, url: string, poster?: { __typename?: 'Poster', originalUrl: string } | null }> };
+
 export type SearchMangaQueryVariables = Exact<{
   search: Scalars['String']['input'];
   limit: Scalars['PositiveInt']['input'];
@@ -1274,6 +1299,44 @@ export const GetAnimeStatusesDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<GetAnimeStatusesQuery, GetAnimeStatusesQueryVariables>;
+export const SearchCharacterDocument = new TypedDocumentString(`
+    query SearchCharacter($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
+  characters(search: $search, limit: $limit, page: $page) {
+    id
+    russian
+    name
+  }
+}
+    `) as unknown as TypedDocumentString<SearchCharacterQuery, SearchCharacterQueryVariables>;
+export const SearchCharacterInlineDocument = new TypedDocumentString(`
+    query SearchCharacterInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
+  characters(search: $search, limit: $limit, page: $page) {
+    id
+    russian
+    name
+    url
+    poster {
+      previewUrl
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<SearchCharacterInlineQuery, SearchCharacterInlineQueryVariables>;
+export const GetCharacterInfoDocument = new TypedDocumentString(`
+    query GetCharacterInfo($id: [ID!]) {
+  characters(ids: $id) {
+    name
+    russian
+    japanese
+    synonyms
+    descriptionHtml
+    descriptionSource
+    poster {
+      originalUrl
+    }
+    url
+  }
+}
+    `) as unknown as TypedDocumentString<GetCharacterInfoQuery, GetCharacterInfoQueryVariables>;
 export const SearchMangaDocument = new TypedDocumentString(`
     query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
   mangas(search: $search, limit: $limit, page: $page, order: popularity) {
