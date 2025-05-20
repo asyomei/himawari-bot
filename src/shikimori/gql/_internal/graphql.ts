@@ -1078,6 +1078,52 @@ export type GetAnimeStatusesQueryVariables = Exact<{
 
 export type GetAnimeStatusesQuery = { __typename?: 'Query', animes: Array<{ __typename?: 'Anime', statusesStats?: Array<{ __typename?: 'StatusStat', status: UserRateStatusEnum, count: number }> | null }> };
 
+export type SearchMangaQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+  limit: Scalars['PositiveInt']['input'];
+  page: Scalars['PositiveInt']['input'];
+}>;
+
+
+export type SearchMangaQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', id: string, russian?: string | null, name: string, isCensored?: boolean | null }> };
+
+export type SearchMangaInlineQueryVariables = Exact<{
+  search: Scalars['String']['input'];
+  limit: Scalars['PositiveInt']['input'];
+  page: Scalars['PositiveInt']['input'];
+}>;
+
+
+export type SearchMangaInlineQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', id: string, russian?: string | null, english?: string | null, name: string, isCensored?: boolean | null, url: string, poster?: { __typename?: 'Poster', previewUrl: string } | null }> };
+
+export type GetMangaInfoQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetMangaInfoQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', name: string, russian?: string | null, isCensored?: boolean | null, kind?: MangaKindEnum | null, volumes: number, chapters: number, status?: MangaStatusEnum | null, score?: number | null, licensors?: Array<string> | null, descriptionHtml?: string | null, descriptionSource?: string | null, url: string, airedOn?: { __typename?: 'IncompleteDate', day?: number | null, month?: number | null, year?: number | null } | null, releasedOn?: { __typename?: 'IncompleteDate', day?: number | null, month?: number | null, year?: number | null } | null, genres?: Array<{ __typename?: 'Genre', kind: GenreKindEnum, russian: string }> | null, publishers: Array<{ __typename?: 'Publisher', name: string }>, poster?: { __typename?: 'Poster', originalUrl: string } | null }> };
+
+export type GetMangaCharactersQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetMangaCharactersQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', characterRoles?: Array<{ __typename?: 'CharacterRole', id: string, rolesRu: Array<string>, character: { __typename?: 'Character', id: string, russian?: string | null, name: string, url: string, poster?: { __typename?: 'Poster', previewUrl: string } | null } }> | null }> };
+
+export type GetMangaScoresQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetMangaScoresQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', scoresStats?: Array<{ __typename?: 'ScoreStat', score: number, count: number }> | null }> };
+
+export type GetMangaStatusesQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type GetMangaStatusesQuery = { __typename?: 'Query', mangas: Array<{ __typename?: 'Manga', statusesStats?: Array<{ __typename?: 'StatusStat', status: UserRateStatusEnum, count: number }> | null }> };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -1228,3 +1274,105 @@ export const GetAnimeStatusesDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<GetAnimeStatusesQuery, GetAnimeStatusesQueryVariables>;
+export const SearchMangaDocument = new TypedDocumentString(`
+    query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
+  mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+    id
+    russian
+    name
+    isCensored
+  }
+}
+    `) as unknown as TypedDocumentString<SearchMangaQuery, SearchMangaQueryVariables>;
+export const SearchMangaInlineDocument = new TypedDocumentString(`
+    query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
+  mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+    id
+    russian
+    english
+    name
+    isCensored
+    url
+    poster {
+      previewUrl
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<SearchMangaInlineQuery, SearchMangaInlineQueryVariables>;
+export const GetMangaInfoDocument = new TypedDocumentString(`
+    query GetMangaInfo($id: String!) {
+  mangas(ids: $id) {
+    name
+    russian
+    isCensored
+    kind
+    volumes
+    chapters
+    status
+    airedOn {
+      day
+      month
+      year
+    }
+    releasedOn {
+      day
+      month
+      year
+    }
+    genres {
+      kind
+      russian
+    }
+    score
+    licensors
+    publishers {
+      name
+    }
+    descriptionHtml
+    descriptionSource
+    poster {
+      originalUrl
+    }
+    url
+  }
+}
+    `) as unknown as TypedDocumentString<GetMangaInfoQuery, GetMangaInfoQueryVariables>;
+export const GetMangaCharactersDocument = new TypedDocumentString(`
+    query GetMangaCharacters($id: String!) {
+  mangas(ids: $id) {
+    characterRoles {
+      id
+      rolesRu
+      character {
+        id
+        russian
+        name
+        url
+        poster {
+          previewUrl
+        }
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<GetMangaCharactersQuery, GetMangaCharactersQueryVariables>;
+export const GetMangaScoresDocument = new TypedDocumentString(`
+    query GetMangaScores($id: String!) {
+  mangas(ids: $id) {
+    scoresStats {
+      score
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<GetMangaScoresQuery, GetMangaScoresQueryVariables>;
+export const GetMangaStatusesDocument = new TypedDocumentString(`
+    query GetMangaStatuses($id: String!) {
+  mangas(ids: $id) {
+    statusesStats {
+      status
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<GetMangaStatusesQuery, GetMangaStatusesQueryVariables>;

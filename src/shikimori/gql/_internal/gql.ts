@@ -23,6 +23,12 @@ type Documents = {
     "\n  query GetAnimeVideos($id: String!) {\n    animes(ids: $id) {\n      videos { id kind name imageUrl url }\n    }\n  }\n": typeof types.GetAnimeVideosDocument,
     "\n  query GetAnimeScores($id: String!) {\n    animes(ids: $id) {\n      scoresStats { score count }\n    }\n  }\n": typeof types.GetAnimeScoresDocument,
     "\n  query GetAnimeStatuses($id: String!) {\n    animes(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n": typeof types.GetAnimeStatusesDocument,
+    "\n  query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian name isCensored\n    }\n  }\n": typeof types.SearchMangaDocument,
+    "\n  query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian english name isCensored url\n      poster { previewUrl }\n    }\n  }\n": typeof types.SearchMangaInlineDocument,
+    "\n  query GetMangaInfo($id: String!) {\n    mangas(ids: $id) {\n      name\n      russian\n      isCensored\n      kind\n      volumes\n      chapters\n      status\n      airedOn { day month year }\n      releasedOn { day month year }\n      genres { kind russian }\n      score\n      licensors\n      publishers { name }\n      descriptionHtml\n      descriptionSource\n      poster { originalUrl }\n      url\n    }\n  }\n": typeof types.GetMangaInfoDocument,
+    "\n  query GetMangaCharacters($id: String!) {\n    mangas(ids: $id) {\n      characterRoles {\n        id\n        rolesRu\n        character {\n          id\n          russian\n          name\n          url\n          poster { previewUrl }\n        }\n      }\n    }\n  }\n": typeof types.GetMangaCharactersDocument,
+    "\n  query GetMangaScores($id: String!) {\n    mangas(ids: $id) {\n      scoresStats { score count }\n    }\n  }\n": typeof types.GetMangaScoresDocument,
+    "\n  query GetMangaStatuses($id: String!) {\n    mangas(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n": typeof types.GetMangaStatusesDocument,
 };
 const documents: Documents = {
     "\n  query SearchAnime($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    animes(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian name isCensored\n    }\n  }\n": types.SearchAnimeDocument,
@@ -33,6 +39,12 @@ const documents: Documents = {
     "\n  query GetAnimeVideos($id: String!) {\n    animes(ids: $id) {\n      videos { id kind name imageUrl url }\n    }\n  }\n": types.GetAnimeVideosDocument,
     "\n  query GetAnimeScores($id: String!) {\n    animes(ids: $id) {\n      scoresStats { score count }\n    }\n  }\n": types.GetAnimeScoresDocument,
     "\n  query GetAnimeStatuses($id: String!) {\n    animes(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n": types.GetAnimeStatusesDocument,
+    "\n  query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian name isCensored\n    }\n  }\n": types.SearchMangaDocument,
+    "\n  query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian english name isCensored url\n      poster { previewUrl }\n    }\n  }\n": types.SearchMangaInlineDocument,
+    "\n  query GetMangaInfo($id: String!) {\n    mangas(ids: $id) {\n      name\n      russian\n      isCensored\n      kind\n      volumes\n      chapters\n      status\n      airedOn { day month year }\n      releasedOn { day month year }\n      genres { kind russian }\n      score\n      licensors\n      publishers { name }\n      descriptionHtml\n      descriptionSource\n      poster { originalUrl }\n      url\n    }\n  }\n": types.GetMangaInfoDocument,
+    "\n  query GetMangaCharacters($id: String!) {\n    mangas(ids: $id) {\n      characterRoles {\n        id\n        rolesRu\n        character {\n          id\n          russian\n          name\n          url\n          poster { previewUrl }\n        }\n      }\n    }\n  }\n": types.GetMangaCharactersDocument,
+    "\n  query GetMangaScores($id: String!) {\n    mangas(ids: $id) {\n      scoresStats { score count }\n    }\n  }\n": types.GetMangaScoresDocument,
+    "\n  query GetMangaStatuses($id: String!) {\n    mangas(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n": types.GetMangaStatusesDocument,
 };
 
 /**
@@ -67,6 +79,30 @@ export function graphql(source: "\n  query GetAnimeScores($id: String!) {\n    a
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetAnimeStatuses($id: String!) {\n    animes(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n"): typeof import('./graphql').GetAnimeStatusesDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian name isCensored\n    }\n  }\n"): typeof import('./graphql').SearchMangaDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {\n    mangas(search: $search, limit: $limit, page: $page, order: popularity) {\n      id russian english name isCensored url\n      poster { previewUrl }\n    }\n  }\n"): typeof import('./graphql').SearchMangaInlineDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetMangaInfo($id: String!) {\n    mangas(ids: $id) {\n      name\n      russian\n      isCensored\n      kind\n      volumes\n      chapters\n      status\n      airedOn { day month year }\n      releasedOn { day month year }\n      genres { kind russian }\n      score\n      licensors\n      publishers { name }\n      descriptionHtml\n      descriptionSource\n      poster { originalUrl }\n      url\n    }\n  }\n"): typeof import('./graphql').GetMangaInfoDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetMangaCharacters($id: String!) {\n    mangas(ids: $id) {\n      characterRoles {\n        id\n        rolesRu\n        character {\n          id\n          russian\n          name\n          url\n          poster { previewUrl }\n        }\n      }\n    }\n  }\n"): typeof import('./graphql').GetMangaCharactersDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetMangaScores($id: String!) {\n    mangas(ids: $id) {\n      scoresStats { score count }\n    }\n  }\n"): typeof import('./graphql').GetMangaScoresDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetMangaStatuses($id: String!) {\n    mangas(ids: $id) {\n      statusesStats { status count }\n    }\n  }\n"): typeof import('./graphql').GetMangaStatusesDocument;
 
 
 export function graphql(source: string) {
