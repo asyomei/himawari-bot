@@ -1,0 +1,39 @@
+{
+  "name": "@asyomei/himawari-bot",
+  "type": "module",
+  "version": "0.0.0",
+  "private": "true",
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "build": "node build.js",
+    "test": "tsc --noEmit",
+    "shikimori-codegen": "graphql-codegen --config shikimori-codegen.js"
+  },
+  "dependencies": {
+    "@grammyjs/auto-retry": "^2.0.2",
+    "@grammyjs/auto-thread": "github:grammyjs/auto-thread",
+    "@grammyjs/ratelimiter": "^1.2.1",
+    "@grammyjs/runner": "^2.0.3",
+    "@grammyjs/transformer-throttler": "^1.2.1",
+    "dayjs": "^1.11.13",
+    "dedent": "^1.6.0",
+    "dotenv": "^16.5.0",
+    "esbuild": "^0.25.4",
+    "grammy": "^1.36.1",
+    "node-html-parser": "^7.0.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.13.1",
+    "@graphql-codegen/cli": "^5.0.6",
+    "@graphql-codegen/client-preset": "^4.8.1",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@types/node": "^22.15.19",
+    "eslint": "^9.27.0",
+    "graphql-scalars": "^1.24.2",
+    "tsx": "^4.19.4",
+    "type-fest": "^4.41.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,19 @@
+image: node:lts-alpine
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - deploy
+
+deploy-job:
+  stage: deploy
+  rules:
+    - if: $CI_PROJECT_NAMESPACE == "asyomei" && $CI_PROJECT_NAME == "himawari-bot"
+  script:
+    - apk add curl sshpass
+    - corepack enable pnpm
+    - pnpm install -P
+    - pnpm build
+    - sh deploy.sh
