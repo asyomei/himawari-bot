@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
-    "@grammyjs/auto-thread": "github:grammyjs/auto-thread",
     "@grammyjs/ratelimiter": "^1.2.1",
     "@grammyjs/runner": "^2.0.3",
     "@grammyjs/transformer-throttler": "^1.2.1",

@@ -11,9 +11,6 @@ importers:
       '@grammyjs/auto-retry':
         specifier: ^2.0.2
         version: 2.0.2(grammy@1.36.1)
-      '@grammyjs/auto-thread':
-        specifier: github:grammyjs/auto-thread
-        version: https://codeload.github.com/grammyjs/auto-thread/tar.gz/3beb99e4d5e9228d87bb40149d35c98fe8ca0344(grammy@1.36.1)
       '@grammyjs/ratelimiter':
         specifier: ^1.2.1
         version: 1.2.1
@@ -475,13 +472,6 @@ packages:
     engines: {node: '>=12.20.0 || >=14.13.1'}
     peerDependencies:
       grammy: ^1.10.0
-
-  '@grammyjs/auto-thread@https://codeload.github.com/grammyjs/auto-thread/tar.gz/3beb99e4d5e9228d87bb40149d35c98fe8ca0344':
-    resolution: {tarball: https://codeload.github.com/grammyjs/auto-thread/tar.gz/3beb99e4d5e9228d87bb40149d35c98fe8ca0344}
-    version: 2.0.1
-    engines: {node: ^12.20.0 || >=14.13.1}
-    peerDependencies:
-      grammy: ^1.12.0
 
   '@grammyjs/ratelimiter@1.2.1':
     resolution: {integrity: sha512-4bmVUBCBnIb2epbDiBLCvvnVjaYg7kDCPR1Ptt6gqoxm5vlD8BjainYv+yjF6221hu2KUv8QAckumDI+6xyGsQ==}
@@ -3199,10 +3189,6 @@ snapshots:
       grammy: 1.36.1
     transitivePeerDependencies:
       - supports-color
-
-  '@grammyjs/auto-thread@https://codeload.github.com/grammyjs/auto-thread/tar.gz/3beb99e4d5e9228d87bb40149d35c98fe8ca0344(grammy@1.36.1)':
-    dependencies:
-      grammy: 1.36.1
 
   '@grammyjs/ratelimiter@1.2.1': {}
 
