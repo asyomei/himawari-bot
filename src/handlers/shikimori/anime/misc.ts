@@ -29,7 +29,7 @@ animeMiscHandler.inlineQuery(/^!anime characters (\w+)$/, async (ctx) => {
   ).map((char) => {
     const title = char.russian ?? char.name
     const desc = title !== char.name ? `${char.name}\n` : ''
-    return InlineQueryResultBuilder.article(`anime:character ${id} ${char.id}`, title, {
+    return InlineQueryResultBuilder.article(`character ${char.id}`, title, {
       url: char.url,
       thumbnail_url: char.poster?.previewUrl,
       description: desc + (char.isMain ? 'Главный герой' : 'Второстепенный герой'),
