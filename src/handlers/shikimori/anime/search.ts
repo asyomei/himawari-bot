@@ -31,7 +31,7 @@ animeSearchHandler.on('message:text').command(['anime', 'animes'], async (ctx) =
   })
 })
 
-animeSearchHandler.callbackQuery(/anime search (\d+) (\d+)/, async (ctx) => {
+animeSearchHandler.callbackQuery(/^anime search (\d+) (\d+)$/, async (ctx) => {
   const page = Number(ctx.match[1])
   const fromId = Number(ctx.match[2])
 

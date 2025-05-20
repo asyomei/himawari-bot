@@ -14,7 +14,7 @@ animeInfoHandler.callbackQuery(/^anime (\w+) (\d+)$/, async (ctx) => {
 
   const anime = await getAnimeInfo({ id })
   if (!anime) {
-    await ctx.answerCallbackQuery('Произошла ошибка: аниме не найдено')
+    await ctx.answerCallbackQuery('Ошибка: аниме не найдено')
     return
   }
 
