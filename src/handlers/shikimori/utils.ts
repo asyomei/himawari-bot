@@ -3,7 +3,7 @@ import type { IncompleteDate } from '~/shikimori/gql'
 import { parse as parseHTML } from 'node-html-parser'
 import { escapeHTML } from '~/utils/escape-html'
 
-const months = 'янв. фев. мар. апр. мая июня июля авг. сент. окт. ноя. дек.'.split(' ')
+const months = 'янв. фев. марта апр. мая июня июля авг. сент. окт. ноя. дек.'.split(' ')
 export function date(date: Dayjs, time = false): string {
   let fmt = `${date.date()} ${months[date.month()]} ${date.year()} г.`
   if (time) fmt = ` ${date.hour()}:${date.minute()}`
