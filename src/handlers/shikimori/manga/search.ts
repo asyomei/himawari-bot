@@ -6,9 +6,12 @@ import { searchManga } from './executors'
 
 export const mangaSearchHandler = new Composer()
 
-mangaSearchHandler.on('message:text').command(['manga', 'mangas'], async (ctx) => {
+mangaSearchHandler.on('message:text').command(['manga', 'mangas', 'ranobe'], async (ctx) => {
+  const isRanobe = ctx.hasCommand('ranobe')
+
   if (!ctx.match) {
-    await ctx.reply('Введите запрос: /manga [запрос]')
+    const cmd = isRanobe ? '/ranobe' : '/manga'
+    await ctx.reply(`Введите запрос: ${cmd} [запрос]`)
     return
   }
 
@@ -16,16 +19,19 @@ mangaSearchHandler.on('message:text').command(['manga', 'mangas'], async (ctx) =
     search: ctx.match,
     limit: ITEMS_PER_PAGE,
     page: 1,
+    kind: isRanobe ? 'novel,light_novel' : '!novel,!light_novel',
   })
 
   if (mangas.length === 0) {
-    await ctx.reply('Манга не найдена', {
+    const msg = isRanobe ? 'Ранобэ не найдено' : 'Манга не найдена'
+    await ctx.reply(msg, {
       reply_parameters: replyTo(ctx),
     })
     return
   }
 
-  await ctx.reply(`<b>Поиск манги:</b> ${ctx.match}`, {
+  const msg = isRanobe ? 'Поиск ранобэ' : 'Поиск манги'
+  await ctx.reply(`<b>${msg}:</b> ${ctx.match}`, {
     parse_mode: 'HTML',
     reply_markup: makeKeyboard(mangas, 1, ctx.from.id),
   })
@@ -49,11 +55,13 @@ mangaSearchHandler.callbackQuery(/manga search (\d+) (\d+)/, async (ctx) => {
   }
 
   const { text } = ctx.msg
+  const isRanobe = text.startsWith('Поиск ранобэ')
   const search = text.slice(text.indexOf(': ') + 2)
   const mangas = await searchManga({
     search,
     page,
     limit: ITEMS_PER_PAGE,
+    kind: isRanobe ? 'novel,light_novel' : '!novel,!light_novel',
   })
 
   if (mangas.length === 0) {

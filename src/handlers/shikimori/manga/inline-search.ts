@@ -5,14 +5,16 @@ import { searchMangaInline } from './executors'
 
 export const mangaInlineSearchHandler = new Composer()
 
-mangaInlineSearchHandler.inlineQuery(/^(?:manga|манга) (.+)$/, async (ctx) => {
-  const search = ctx.match[1].trim()
+mangaInlineSearchHandler.inlineQuery(/^(manga|манга|ranobe|ранобэ) (.+)$/, async (ctx) => {
+  const isRanobe = ctx.match[1] === 'ranobe' || ctx.match[1] === 'ранобэ'
+  const search = ctx.match[2].trim()
   const page = Number(ctx.inlineQuery.offset || 1)
 
   const mangas = await searchMangaInline({
     search,
     page,
     limit: INLINE_MAX_RESULTS,
+    kind: isRanobe ? 'novel,light_novel' : '!novel,!light_novel',
   })
 
   const results = mangas.map((manga) => {

@@ -1,16 +1,16 @@
 import { execute, graphql } from '~/shikimori/gql'
 
 export const searchManga = execute(graphql(`
-  query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
-    mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+  query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!, $kind: MangaKindString!) {
+    mangas(search: $search, limit: $limit, page: $page, kind: $kind, order: popularity) {
       id russian name isCensored
     }
   }
 `), x => x.mangas)
 
 export const searchMangaInline = execute(graphql(`
-  query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
-    mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+  query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!, $kind: MangaKindString!) {
+    mangas(search: $search, limit: $limit, page: $page, kind: $kind, order: popularity) {
       id russian english name isCensored url
       poster { previewUrl }
     }

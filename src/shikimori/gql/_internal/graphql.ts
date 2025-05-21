@@ -1107,6 +1107,7 @@ export type SearchMangaQueryVariables = Exact<{
   search: Scalars['String']['input'];
   limit: Scalars['PositiveInt']['input'];
   page: Scalars['PositiveInt']['input'];
+  kind: Scalars['MangaKindString']['input'];
 }>;
 
 
@@ -1116,6 +1117,7 @@ export type SearchMangaInlineQueryVariables = Exact<{
   search: Scalars['String']['input'];
   limit: Scalars['PositiveInt']['input'];
   page: Scalars['PositiveInt']['input'];
+  kind: Scalars['MangaKindString']['input'];
 }>;
 
 
@@ -1338,8 +1340,14 @@ export const GetCharacterInfoDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<GetCharacterInfoQuery, GetCharacterInfoQueryVariables>;
 export const SearchMangaDocument = new TypedDocumentString(`
-    query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
-  mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+    query SearchManga($search: String!, $limit: PositiveInt!, $page: PositiveInt!, $kind: MangaKindString!) {
+  mangas(
+    search: $search
+    limit: $limit
+    page: $page
+    kind: $kind
+    order: popularity
+  ) {
     id
     russian
     name
@@ -1348,8 +1356,14 @@ export const SearchMangaDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<SearchMangaQuery, SearchMangaQueryVariables>;
 export const SearchMangaInlineDocument = new TypedDocumentString(`
-    query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!) {
-  mangas(search: $search, limit: $limit, page: $page, order: popularity) {
+    query SearchMangaInline($search: String!, $limit: PositiveInt!, $page: PositiveInt!, $kind: MangaKindString!) {
+  mangas(
+    search: $search
+    limit: $limit
+    page: $page
+    kind: $kind
+    order: popularity
+  ) {
     id
     russian
     english
