@@ -33,8 +33,7 @@ export const execute: ExecuteFn = ((query: string, transform?: (data: any) => an
 
   if (result.errors) {
     const err = result.errors[0]
-    const path = err.path.join('/')
-    throw new Error(`${path}: ${err.message}`)
+    throw new Error(err.message)
   }
 
   const { data } = result
