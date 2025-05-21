@@ -11,7 +11,7 @@ export function date(date: Dayjs, time = false): string {
 }
 export function partDate(date: IncompleteDate): string {
   const day = date.day?.toString().padStart(2, '0')
-  const month = date.month != null ? months[date.month] : undefined
+  const month = date.month != null ? months[date.month - 1] : undefined
   const year = date.year != null ? `${date.year} г.` : undefined
   return [day, month, year].filter(x => x != null).join(' ')
 }
