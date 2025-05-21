@@ -11,7 +11,7 @@ mangaMiscHandler.inlineQuery(/^!manga characters (\w+)$/, async (ctx) => {
   const page = Number(ctx.inlineQuery.offset || 1)
   const characters = await getMangaCharacters({ id })
   if (!characters) {
-    await ctx.answerCallbackQuery('Ошибка: манга не найдено')
+    await ctx.answerCallbackQuery('Ошибка: манга не найдена')
     return
   }
 
@@ -41,7 +41,7 @@ mangaMiscHandler.inlineQuery(/^!manga scores (\w+)$/, async (ctx) => {
   const id = ctx.match[1]
   const manga = await getMangaScores({ id })
   if (!manga) {
-    await ctx.answerCallbackQuery('Ошибка: манга не найдено')
+    await ctx.answerCallbackQuery('Ошибка: манга не найдена')
     return
   }
 
@@ -64,7 +64,7 @@ mangaMiscHandler.inlineQuery(/^!manga statuses (\w+)$/, async (ctx) => {
   const id = ctx.match[1]
   const manga = await getMangaStatuses({ id })
   if (!manga) {
-    await ctx.answerCallbackQuery('Ошибка: манга не найдено')
+    await ctx.answerCallbackQuery('Ошибка: манга не найдена')
     return
   }
 

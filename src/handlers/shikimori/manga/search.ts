@@ -19,7 +19,7 @@ mangaSearchHandler.on('message:text').command(['manga', 'mangas'], async (ctx) =
   })
 
   if (mangas.length === 0) {
-    await ctx.reply('Манга не найдено', {
+    await ctx.reply('Манга не найдена', {
       reply_parameters: replyTo(ctx),
     })
     return

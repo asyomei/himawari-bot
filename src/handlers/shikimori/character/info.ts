@@ -14,7 +14,7 @@ characterInfoHandler.callbackQuery(/^character (\w+) (\d+)$/, async (ctx) => {
 
   const character = await getCharacterInfo({ id })
   if (!character) {
-    await ctx.answerCallbackQuery('Ошибка: персонаж не найдено')
+    await ctx.answerCallbackQuery('Ошибка: персонаж не найден')
     return
   }
 
