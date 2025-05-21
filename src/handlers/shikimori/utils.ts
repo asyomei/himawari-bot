@@ -23,7 +23,7 @@ export function duration(minutes: number): string {
   const hoursFormat = new Intl.PluralRules('ru').select(hours)
   const hoursWord = hoursFormat === 'one' ? 'час' : hoursFormat === 'few' ? 'часа' : 'часов'
 
-  return `${hours ? `${hours} ${hoursWord}` : ''} ${minutes} мин.`
+  return `${hours ? `${hours} ${hoursWord} ` : ''}${minutes} мин.`
 }
 
 export function parseDescription(description: string): string {
