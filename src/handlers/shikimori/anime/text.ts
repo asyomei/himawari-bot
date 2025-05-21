@@ -89,7 +89,7 @@ export function makeAnimeText(anime: PickedAnime): string {
 
   // Genres and themes
   if (anime.genres) {
-    const genres = anime.genres.filter(x => x.kind === 'genre').map(x => x.russian)
+    const genres = anime.genres.filter(x => x.kind !== 'theme').map(x => x.russian)
     if (genres.length > 0) {
       text += `<b>${genres.length > 1 ? 'Жанры' : 'Жанр'}:</b> ${genres.join(', ')}\n`
     }
