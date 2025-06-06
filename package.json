@@ -3,12 +3,14 @@
   "type": "module",
   "version": "0.0.0",
   "private": "true",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.11.1+sha512.e519b9f7639869dc8d5c3c5dfef73b3f091094b0a006d7317353c72b124e80e1afd429732e28705ad6bfa1ee879c1fce46c128ccebd3192101f43dd67c667912",
   "scripts": {
     "dev": "tsx watch src/main.ts",
     "build": "node build.js",
     "test": "tsc --noEmit",
-    "shikimori-codegen": "graphql-codegen --config shikimori-codegen.js"
+    "shikimori-codegen": "graphql-codegen --config shikimori-codegen.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@grammyjs/auto-retry": "^2.0.2",
@@ -18,18 +20,18 @@
     "dayjs": "^1.11.13",
     "dedent": "^1.6.0",
     "dotenv": "^16.5.0",
-    "esbuild": "^0.25.4",
-    "grammy": "^1.36.1",
+    "esbuild": "^0.25.5",
+    "grammy": "^1.36.3",
     "node-html-parser": "^7.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.1",
-    "@graphql-codegen/cli": "^5.0.6",
-    "@graphql-codegen/client-preset": "^4.8.1",
+    "@antfu/eslint-config": "^4.14.1",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/client-preset": "^4.8.2",
     "@graphql-codegen/schema-ast": "^4.1.0",
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@types/node": "^22.15.19",
-    "eslint": "^9.27.0",
+    "@types/node": "^22.15.30",
+    "eslint": "^9.28.0",
     "graphql-scalars": "^1.24.2",
     "tsx": "^4.19.4",
     "type-fest": "^4.41.0",
