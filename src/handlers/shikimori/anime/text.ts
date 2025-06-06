@@ -80,7 +80,9 @@ export function makeAnimeText(anime: PickedAnime): string {
         text += ` по ${partDate(anime.releasedOn)}`
       }
     } else {
-      if (anime.releasedOn?.year) {
+      if (anime.airedOn?.year) {
+        text += `${partDate(anime.airedOn)}`
+      } else if (anime.releasedOn?.year) {
         text += `${partDate(anime.releasedOn)}`
       }
     }
