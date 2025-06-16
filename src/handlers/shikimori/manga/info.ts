@@ -1,4 +1,5 @@
-import { Composer, InlineKeyboard } from 'grammy'
+import { Composer, InlineKeyboard, InlineQueryResultBuilder } from 'grammy'
+import { replyTo } from '~/utils/reply-to'
 import { getMangaInfo } from './executors'
 import { makeMangaText } from './text'
 
@@ -47,6 +48,50 @@ mangaInfoHandler.chosenInlineResult(/^manga (\w+)$/, async (ctx) => {
     },
     reply_markup: makeKeyboard(id, manga.url),
   })
+})
+
+mangaInfoHandler.hears(/shikimori\.one\/(?:ranobe|mangas)\/\D*(\d+)/, async (ctx) => {
+  const id = ctx.match[1]
+  const manga = await getMangaInfo({ id })
+  if (!manga) return
+
+  const text = makeMangaText(manga)
+  await ctx.reply(text, {
+    reply_parameters: replyTo(ctx),
+    parse_mode: 'HTML',
+    link_preview_options: {
+      url: manga.poster?.originalUrl,
+      show_above_text: true,
+    },
+    reply_markup: makeKeyboard(id, manga.url),
+  })
+})
+
+mangaInfoHandler.inlineQuery(/shikimori\.one\/(?:ranobe|mangas)\/\D*(\d+)/, async (ctx) => {
+  const id = ctx.match[1]
+  const manga = await getMangaInfo({ id })
+  if (!manga) return
+
+  const text = makeMangaText(manga)
+
+  const name = manga.russian ?? manga.name
+  let description = ''
+  if (name !== manga.name) description = manga.name
+
+  const result = InlineQueryResultBuilder.article(`manga-url ${id}`, name, {
+    description,
+    url: manga.url,
+    thumbnail_url: manga.poster?.originalUrl,
+    reply_markup: makeKeyboard(id, manga.url),
+  }).text(text, {
+    parse_mode: 'HTML',
+    link_preview_options: {
+      url: manga.poster?.originalUrl,
+      show_above_text: true,
+    },
+  })
+
+  await ctx.answerInlineQuery([result])
 })
 
 function makeKeyboard(mangaId: string, url: string): InlineKeyboard {

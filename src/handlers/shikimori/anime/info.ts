@@ -1,4 +1,5 @@
-import { Composer, InlineKeyboard } from 'grammy'
+import { Composer, InlineKeyboard, InlineQueryResultBuilder } from 'grammy'
+import { replyTo } from '~/utils/reply-to'
 import { getAnimeInfo } from './executors'
 import { makeAnimeText } from './text'
 
@@ -47,6 +48,50 @@ animeInfoHandler.chosenInlineResult(/^anime (\w+)$/, async (ctx) => {
     },
     reply_markup: makeKeyboard(id, anime.url),
   })
+})
+
+animeInfoHandler.hears(/shikimori\.one\/animes\/\D*(\d+)/, async (ctx) => {
+  const id = ctx.match[1]
+  const anime = await getAnimeInfo({ id })
+  if (!anime) return
+
+  const text = makeAnimeText(anime)
+  await ctx.reply(text, {
+    reply_parameters: replyTo(ctx),
+    parse_mode: 'HTML',
+    link_preview_options: {
+      url: anime.poster?.originalUrl,
+      show_above_text: true,
+    },
+    reply_markup: makeKeyboard(id, anime.url),
+  })
+})
+
+animeInfoHandler.inlineQuery(/shikimori\.one\/animes\/\D*(\d+)/, async (ctx) => {
+  const id = ctx.match[1]
+  const anime = await getAnimeInfo({ id })
+  if (!anime) return
+
+  const text = makeAnimeText(anime)
+
+  const name = anime.russian ?? anime.name
+  let description = ''
+  if (name !== anime.name) description = anime.name
+
+  const result = InlineQueryResultBuilder.article(`anime-url ${id}`, name, {
+    description,
+    url: anime.url,
+    thumbnail_url: anime.poster?.originalUrl,
+    reply_markup: makeKeyboard(id, anime.url),
+  }).text(text, {
+    parse_mode: 'HTML',
+    link_preview_options: {
+      url: anime.poster?.originalUrl,
+      show_above_text: true,
+    },
+  })
+
+  await ctx.answerInlineQuery([result])
 })
 
 function makeKeyboard(animeId: string, url: string): InlineKeyboard {
