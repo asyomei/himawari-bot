@@ -1,8 +1,8 @@
-# himawari-bot
+# shikimori-search-bot
 
 telegram bot for shikimori info searching
 
-instance: [Himawari](https://t.me/himawaridesu_bot)
+instance: [Shikimori Search Bot](https://t.me/ShikimoriSearchBot)
 
 ## dev
 

@@ -10,7 +10,7 @@ stages:
 deploy-job:
   stage: deploy
   rules:
-    - if: $CI_PROJECT_NAMESPACE == "asyomei" && $CI_PROJECT_NAME == "himawari-bot"
+    - if: $CI_PROJECT_NAMESPACE == "asyomei" && $CI_PROJECT_NAME == "shikimori-search-bot"
   script:
     - apk add curl sshpass openssh-client
     - corepack enable pnpm

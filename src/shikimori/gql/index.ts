@@ -24,7 +24,7 @@ export const execute: ExecuteFn = ((query: string, transform?: (data: any) => an
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/graphql-response+json',
-      'User-Agent': 'himawari-bot/1.0',
+      'User-Agent': 'shikimori-search-bot/1.0',
     },
     body: JSON.stringify({ query, variables }),
   })
